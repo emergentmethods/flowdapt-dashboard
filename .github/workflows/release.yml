@@ -31,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Release
-        if: !startsWith(github.event.head_commit.message, 'chore(release):')
+        if: ${{ !startsWith(github.event.head_commit.message, 'chore(release):') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GIT_PAT }}
           GIT_AUTHOR_NAME: ${{ vars.GIT_NAME }}
