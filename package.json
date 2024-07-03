@@ -102,7 +102,6 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
       [
         "@semantic-release/changelog",
         {
@@ -121,11 +120,9 @@
         "@semantic-release/git",
         {
           "assets": [
-            "src/version.ts",
-            "package.json",
-            "package-lock.json"
+            "package.json"
           ],
-          "message": "chore(release): Release ${nextRelease.version} [skip ci]"
+          "message": "chore(release): Release ${nextRelease.version} [skip release]"
         }
       ]
     ]
