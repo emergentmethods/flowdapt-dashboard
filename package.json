@@ -122,7 +122,7 @@
           "assets": [
             "package.json"
           ],
-          "message": "chore(release): Release ${nextRelease.version} [skip release]"
+          "message": "chore(release): Release ${nextRelease.version}"
         }
       ]
     ]
