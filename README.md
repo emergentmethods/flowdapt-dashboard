@@ -12,6 +12,16 @@ Flowdapt Dashboard
 
 ## Installation
 
+### Running with Docker
+
+The easiest way to use the Flowdapt dashboard is by simply running the Docker image:
+
+```bash
+docker run --network=host ghcr.io/emergentmethods/flowdapt-dashboard:latest
+```
+
+It will run the dashboard on `http://localhost:3030` and it will look for a running Flowdapt server on `http://localhost:8070`. If you are running Flowdapt at a different location, you can specify that by controlling the environment variable `NEXT_PUBLIC_API_BASE_URL=http://localhost:8070`.
+
 ### Project Setup Guide
 
 Follow these steps to set up and run the project:
