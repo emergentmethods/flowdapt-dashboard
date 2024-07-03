@@ -25,8 +25,6 @@ COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN pnpm build
-RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm prune --prod --no-optional
-RUN rm -rf ./**/*/src
 
 # Final image
 FROM alpine AS runner
