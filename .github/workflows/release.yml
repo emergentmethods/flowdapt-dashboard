@@ -1,0 +1,40 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_NAME: ${{ vars.GIT_NAME }}
+          GIT_AUTHOR_EMAIL: ${{ vars.GIT_EMAIL }}
+          GIT_COMMITTER_NAME: ${{ vars.GIT_NAME }}
+          GIT_COMMITTER_EMAIL: ${{ vars.GIT_EMAIL }}
+        run: npx semantic-release

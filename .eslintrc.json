@@ -1,0 +1,98 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2023,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "**/tsconfig.json"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "no-unused-vars": "off",
+    "prefer-const": "error",
+    "no-use-before-define": "error",
+    "no-var": "error",
+    "no-shadow": "error",
+    "no-undef": "error",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "no-debugger": "error",
+    "eqeqeq": "error",
+    "no-eval": "error",
+    "curly": "error",
+    "no-implied-eval": "error",
+    "no-template-curly-in-string": "error",
+    "no-throw-literal": "error",
+    "react/jsx-key": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/jsx-no-target-blank": "error",
+    "react/jsx-no-undef": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/jsx-wrap-multilines": "error",
+    "react/no-danger": "warn",
+    "react/no-direct-mutation-state": "error",
+    "react/no-typos": "error",
+    "react/no-unused-state": "error",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": "error",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-var-requires": 0,
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "variable",
+        "format": ["PascalCase", "camelCase", "UPPER_CASE"],
+        "filter": {
+          "regex": "Context$",
+          "match": true
+        }
+      },
+      {
+        "selector": "variable",
+        "format": ["camelCase", "UPPER_CASE"],
+        "filter": {
+          "regex": "^_",
+          "match": false
+        }
+      },
+      {
+        "selector": "variable",
+        "types": ["function"],
+        "format": ["PascalCase", "camelCase", "UPPER_CASE"],
+        "filter": {
+          "regex": "^_",
+          "match": false
+        }
+      }
+    ],
+    "react/jsx-pascal-case": "error"
+  },
+  "overrides": [
+    {
+      "files": ["*.d.ts"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    }
+  ],
+  "globals": {
+    "Flowdapt": "readonly"
+  }
+}
