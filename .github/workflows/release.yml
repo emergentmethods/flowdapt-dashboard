@@ -37,4 +37,4 @@ jobs:
           GIT_AUTHOR_EMAIL: ${{ vars.GIT_EMAIL }}
           GIT_COMMITTER_NAME: ${{ vars.GIT_NAME }}
           GIT_COMMITTER_EMAIL: ${{ vars.GIT_EMAIL }}
-        run: npx semantic-release
+        run: pnpm dlx semantic-release
