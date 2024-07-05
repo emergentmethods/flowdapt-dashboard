@@ -109,22 +109,6 @@ Use PascalCase for component names and class names.
 Make variable and function names descriptive and concise.
 Use UPPER_SNAKE_CASE for constants.
 
-### 3. ESLint Configuration
-
-- ...
-
-### 4. Prettier Integration
-
-- ...
-
-### 5. Pre-commit Hooks
-
-- ...
-
-### 6. TypeScript (optional)
-
-- ...
-
 ### ESLint Rules
 
 | Rule                                | Value                                    | Explanation                                                                            |
@@ -194,7 +178,7 @@ We highly value clear and concise documentation in our codebase. We use TSDoc to
 
 Here's an example of a well-documented function using TSDoc:
 
-````typescript
+```typescript
 /**
  * Calculate the sum of two numbers.
  *
@@ -210,59 +194,7 @@ Here's an example of a well-documented function using TSDoc:
 export function add(a: number, b: number): number {
   return a + b;
 }
-````
-
-## Tests
-
-### Unit Tests
-
-React testing library and Jest
-
-### e2e Tests
-
-#### Playwright
-
-To install Playwright, use the command `npx playwright install`.
-
-We're employing a HTTP server with mock data to handle API call mocking. This is implemented via the code in `./mockServer`. The mock server's responses can be customized in `mockServer/main.ts`.
-
-Here are the commands for running the e2e tests:
-
-- `npm run test:e2e`: Initiates the mock server and executes the tests in development mode, with hot reloading enabled.
-- `npm run test:e2e:ui`: Functions like the previous command, but also opens the browser.
-- `npm run test:e2e:build`: Activates the mock server and carries out the tests in build mode without hot reloading. Although the initialization for this command might take longer, it's useful for verifying whether the tests operate correctly in production mode. After the build process, test execution speeds up.
-- `e2e`: Executes the tests using the Flowdapt backend without the mock server.
-- `e2e:ui`: Similar to the previous command but it also opens the browser.
-
-#### MSW
-
-MSW (Mock Service Worker) is installed with the primary intention to intercept server-side calls and simplify mock creation. However, at present, MSW doesn't support the Next.JS app directory, hence we're not utilizing it.
-
-Follow the issue here:
-
-[Support Next.js 13 (App directory)](https://github.com/mswjs/msw/issues/1644)
-
-To record server API calls, add this code in `src/app/layout.tsx` (after the imports - top of the file):
-
-```typescript
-if (process.env.NEXT_PUBLIC_API_MOCKING_RECORD === "enabled") {
-  require("../../mocks");
-}
 ```
-
-And add this line in `.env.local` file:
-
-```env
-NEXT_PUBLIC_API_MOCKING_RECORD="enabled"
-```
-
-## License
-
-Include your project's license information.
-
-## Flowdapt references
-
-- For icons: [Hero Icons](https://heroicons.com)
 
 ## Theme Modification Guide
 
