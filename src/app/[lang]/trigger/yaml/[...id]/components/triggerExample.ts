@@ -1,5 +1,5 @@
 export const triggerExample = `
-kind: trigger
+kind: trigger_rule
 metadata:
   name: schedule_workflow_name
   annotations:

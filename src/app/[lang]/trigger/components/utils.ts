@@ -55,7 +55,7 @@ export const handleTriggerflowNewEditRoute = (props: Flowdapt.IPageParams) => {
 export const getInitialTriggerPageData = async (id: string, type: "new" | "edit") => {
   if (type === "new") {
     const trigger: TriggerRuleResourceReadResponseDTOType[FLOWDAPT_API_VERSION]["data"] = {
-      kind: "trigger",
+      kind: "trigger_rule",
       metadata: {
         name: "",
         annotations: {},
