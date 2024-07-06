@@ -3,7 +3,7 @@ import { FormConfigFromYamlData } from "./Schema";
 import { UseFormSetError } from "react-hook-form";
 import { LanguageDictType } from "@/i18n/dictionaries";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { saveConfig } from "../../../server-actions";
+import { saveTrigger } from "../../../server-actions";
 
 interface IOnSubmit {
   router: AppRouterInstance;
@@ -21,9 +21,9 @@ export const onSubmit = (params: IOnSubmit) => {
 
       if (definition) {
         try {
-          await saveConfig(definition, data.uid);
+          await saveTrigger(definition, data.uid);
           showMessage(data.uid ? dict.global.editedMessage : dict.global.createdMessage);
-          router.push("/config");
+          router.push("/trigger");
           router.refresh();
         } catch (e) {
           //@ts-expect-error
@@ -49,6 +49,6 @@ interface ICancel {
 export const cancelPage = (params: ICancel) => {
   const { router } = params;
   return () => {
-    router.push("/config");
+    router.push("/trigger");
   };
 };

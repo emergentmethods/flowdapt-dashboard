@@ -4,13 +4,13 @@ import Modal from "@/components/common/Modal";
 import useDictionaries from "@/hooks/useDictionaries";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { deleteAllConfigs } from "../../server-actions";
+import { deleteAllTriggers } from "../../server-actions";
 
 interface IModalDeleteSelectedConfigs {
   configNames: string[];
   modalDeleteAllId: string;
 }
-const ModalDeleteSelectedConfigs = (props: IModalDeleteSelectedConfigs) => {
+const ModalDeleteSelectedTriggers = (props: IModalDeleteSelectedConfigs) => {
   const { modalDeleteAllId, configNames } = props;
   const router = useRouter();
   const dict = useDictionaries();
@@ -20,7 +20,7 @@ const ModalDeleteSelectedConfigs = (props: IModalDeleteSelectedConfigs) => {
   const deleteAll = async () => {
     setIsFetching(true);
 
-    await deleteAllConfigs(configNames);
+    await deleteAllTriggers(configNames);
     setIsFetching(false);
     startTransition(() => {
       // Refresh the current route:
@@ -41,12 +41,12 @@ const ModalDeleteSelectedConfigs = (props: IModalDeleteSelectedConfigs) => {
       actionCallback={deleteAll}
       action={dict.global.delete}
       cancel={dict.global.cancel}
-      description={dict.configs.modalConfirmDeleteSelected}
+      description={dict.trigger.modalConfirmDeleteSelected}
       modalId={modalDeleteAllId}
-      title={dict.configs.modalDeleteSelectedTitle}
+      title={dict.trigger.modalDeleteSelectedTitle}
       isMutating={isMutating}
     />
   );
 };
 
-export default ModalDeleteSelectedConfigs;
+export default ModalDeleteSelectedTriggers;

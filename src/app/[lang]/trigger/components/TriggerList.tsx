@@ -1,10 +1,10 @@
 "use server";
 
 import { Locale, getDictionary } from "@/i18n/dictionaries";
-import ConfigRowActions from "./TriggerRowActions";
+import TriggerRowActions from "./TriggerRowActions";
 import { ITable, ITableOptions } from "@/components/tables/utils";
 import Table from "@/components/tables";
-import ConfigPageActions from "./TriggerPageActions";
+import TriggerPageActions from "./TriggerPageActions";
 
 export type TriggerData = {
   name: string;
@@ -17,25 +17,29 @@ export type TriggerData = {
 };
 
 interface IConfigListProps {
-  configPromise: Promise<TriggerData[]>;
+  triggerPromise: Promise<TriggerData[]>;
   lang: Locale;
   tableOptions: ITableOptions<TriggerData>;
 }
 
 const TriggerList = async (props: IConfigListProps) => {
-  const { lang, tableOptions, configPromise } = props;
+  const { lang, tableOptions, triggerPromise } = props;
   const dict = getDictionary(lang);
-  const configData = await configPromise;
+  const triggerData = await triggerPromise;
   const localDict = dict["trigger"];
   const globalDict = dict["global"];
 
   const tableProps: ITable<TriggerData> = {
     tableOptions,
-    data: configData,
+    data: triggerData,
     tableHeaders: [
       {
         fieldName: "name",
         label: localDict.name,
+      },
+      {
+        fieldName: "type",
+        label: localDict.type,
       },
       {
         fieldName: "uid",
@@ -51,7 +55,7 @@ const TriggerList = async (props: IConfigListProps) => {
         fieldType: "date",
       },
     ],
-    RowActions: ConfigRowActions,
+    RowActions: TriggerRowActions,
     actionsLabel: globalDict.actions,
     pathname: "config",
     selectRowOptions: {
@@ -60,7 +64,7 @@ const TriggerList = async (props: IConfigListProps) => {
     },
     pageHeaderOptions: {
       title: localDict.title,
-      rightElement: <ConfigPageActions />,
+      rightElement: <TriggerPageActions />,
     },
   };
   return <Table {...tableProps} />;

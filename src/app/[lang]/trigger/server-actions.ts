@@ -2,27 +2,27 @@
 
 import { getClient } from "@/lib/util";
 
-export async function saveConfig(definition: any, identifier?: string) {
+export async function saveTrigger(definition: any, id?: string) {
   const flowdaptSDK = getClient();
 
-  if (identifier) {
-    await flowdaptSDK.configs.updateConfig({
+  if (id) {
+    await flowdaptSDK.triggers.updateTrigger({
       request: definition,
-      identifier: identifier,
+      id: id,
     });
   } else {
-    await flowdaptSDK.configs.createConfig({
+    await flowdaptSDK.triggers.createTrigger({
       request: definition,
     });
   }
 }
 
-export async function deleteConfig(identifier: string) {
+export async function deleteTrigger(id: string) {
   const flowdaptSDK = getClient();
-  await flowdaptSDK.configs.deleteConfig({ identifier: identifier });
+  await flowdaptSDK.triggers.deleteTrigger({ id: id });
 }
 
-export async function deleteAllConfigs(identifierList: string[]) {
+export async function deleteAllTriggers(idList: string[]) {
   const flowdaptSDK = getClient();
-  await Promise.all(identifierList.map(w => flowdaptSDK.configs.deleteConfig({ identifier: w })));
+  await Promise.all(idList.map(w => flowdaptSDK.triggers.deleteTrigger({ id: w })));
 }

@@ -1,4 +1,4 @@
-import { ForwardIcon, HomeIcon, CogIcon } from "@heroicons/react/24/outline";
+import { ForwardIcon, HomeIcon, CogIcon, FireIcon } from "@heroicons/react/24/outline";
 import { ReactNode } from "react";
 
 export const menuData: {
@@ -20,5 +20,10 @@ export const menuData: {
     label: "Configurations",
     link: "/config",
     Icon: <CogIcon className="w-7 h-7" />,
+  },
+  {
+    label: "Triggers",
+    link: "/trigger",
+    Icon: <FireIcon className="w-7 h-7" />,
   },
 ];

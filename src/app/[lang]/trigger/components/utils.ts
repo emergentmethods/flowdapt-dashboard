@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { FLOWDAPT_API_VERSION, getClient } from "@/lib/util";
 import { TriggerData } from "./TriggerList";
-import { ConfigResourceReadResponseDTOType } from "@emergentmethods/flowdapt-ts-sdk";
+import { TriggerRuleResourceReadResponseDTOType } from "@emergentmethods/flowdapt-ts-sdk";
 
 export async function getTriggers() {
   const flowdaptSDK = getClient();
@@ -36,7 +36,7 @@ export async function getTrigger(id: string) {
   }
 }
 
-export const handleConfigflowNewEditRoute = (props: Flowdapt.IPageParams) => {
+export const handleTriggerflowNewEditRoute = (props: Flowdapt.IPageParams) => {
   const action = (props?.params?.id || [])[0];
   const editId = (props?.params?.id || [])[1];
 
@@ -52,25 +52,26 @@ export const handleConfigflowNewEditRoute = (props: Flowdapt.IPageParams) => {
   return { id: editId, type: action as "new" | "edit" };
 };
 
-export const getInitialConfigPageData = async (id: string, type: "new" | "edit") => {
+export const getInitialTriggerPageData = async (id: string, type: "new" | "edit") => {
   if (type === "new") {
-    const config: ConfigResourceReadResponseDTOType[FLOWDAPT_API_VERSION]["data"] = {
-      kind: "config",
+    const trigger: TriggerRuleResourceReadResponseDTOType[FLOWDAPT_API_VERSION]["data"] = {
+      kind: "trigger",
       metadata: {
         name: "",
         annotations: {},
       },
       spec: {
-        selector: {
-          type: "annotation",
-          value: "",
+        type: "schedule",
+        rule: {},
+        action: {
+          target: "",
+          parameters: {},
         },
-        data: {},
       },
     };
-    return config;
+    return trigger;
   } else {
-    const config = await getTrigger(id);
-    return config;
+    const trigger = await getTrigger(id);
+    return trigger;
   }
 };

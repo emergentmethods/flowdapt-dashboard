@@ -1,7 +1,7 @@
 "use client";
 
 import DropdownPageActions from "../../../../../components/DropdownPageActions";
-import ModalDeleteSelectedConfigs from "./ModalDeleteSelectedConfigs";
+import ModalDeleteSelectedTriggers from "./ModalDeleteSelectedTriggers";
 import useDictionaries from "@/hooks/useDictionaries";
 import Link from "next/link";
 import { ReactNode, useContext } from "react";
@@ -12,13 +12,13 @@ import { TableContext } from "@/components/tables/TableContext";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export const getDropdownItems = (
-  worklowsSelected: string[],
+  itemsSelected: string[],
   dict: LanguageDictType,
   router: AppRouterInstance,
   modalDeleteAllId: string
 ) => {
   const dropdownItems: ReactNode[] = [];
-  if (worklowsSelected.length > 0) {
+  if (itemsSelected.length > 0) {
     dropdownItems.push(
       <button
         type="button"
@@ -31,7 +31,7 @@ export const getDropdownItems = (
     );
   }
   dropdownItems.push(
-    <Link href={"/config/yaml/new"} key={"newyaml"} className="justify-between">
+    <Link href={"/trigger/yaml/new"} key={"newyaml"} className="justify-between">
       {dict.configs.newFromYaml}
     </Link>
   );
@@ -59,7 +59,7 @@ const ConfigPageActions = () => {
     <div>
       <InputTableSearch />
       <DropdownPageActions title={dict.global.actions} dropdownItems={dropdownItems}>
-        <ModalDeleteSelectedConfigs
+        <ModalDeleteSelectedTriggers
           modalDeleteAllId={modalDeleteAllId}
           configNames={allSelectedItems}
         />

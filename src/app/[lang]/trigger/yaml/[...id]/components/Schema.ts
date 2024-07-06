@@ -14,10 +14,10 @@ export const getSchema = (dict: LanguageDictType) => {
       yaml: yup
         .string()
         .required()
-        .test("valid-yaml", dict.workflow.field_configYamlInvalid, isValidYaml)
+        .test("valid-yaml", dict.trigger.field_configYamlInvalid, isValidYaml)
         .test(
           "no-references",
-          dict.workflow.field_configYamlNoReferencesError,
+          dict.trigger.field_triggerYamlNoReferencesError,
           yamlNoReferencesTest
         ),
     })

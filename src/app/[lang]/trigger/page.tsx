@@ -8,19 +8,19 @@ import { getTriggersFlatData } from "./components/utils";
 export const revalidate = 0;
 
 const getTriggersPageData = async (tableOptions: ITableOptions<TriggerData>) => {
-  const configList: TriggerData[] = await getTriggersFlatData();
-  const filteredConfigs: TriggerData[] = await filterOrderDataTable(tableOptions, configList);
-  return filteredConfigs;
+  const dataList: TriggerData[] = await getTriggersFlatData();
+  const filteredTriggers: TriggerData[] = await filterOrderDataTable(tableOptions, dataList);
+  return filteredTriggers;
 };
 
 export default async function Page(props: Flowdapt.IPageParams) {
   const lang = getLanguage(props);
-  const tableOptions = getTableOptions<TriggerData>(props, ["name", "uid", "group"]);
+  const tableOptions = getTableOptions<TriggerData>(props, ["name", "type", "uid", "group"]);
   const data = getTriggersPageData(tableOptions);
 
   return (
     <Container>
-      <TriggerList configPromise={data} tableOptions={tableOptions} lang={lang} />
+      <TriggerList triggerPromise={data} tableOptions={tableOptions} lang={lang} />
     </Container>
   );
 }

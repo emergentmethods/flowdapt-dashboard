@@ -3,22 +3,22 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FlowdaptCodeMirror from "@/components/Form/CodeMirror";
-import { configExample } from "./configExample";
+import { triggerExample } from "./triggerExample";
 import { FLOWDAPT_API_VERSION, parseJsonToYaml } from "@/lib/util";
 import { useRouter } from "next/navigation";
 import useDictionaries from "@/hooks/useDictionaries";
 import { useMessage } from "@/context/MessageContext/Index";
 import { FormConfigFromYamlData, getSchema } from "./Schema";
 import { onSubmit, cancelPage } from "./util";
-import { ConfigResourceReadResponseDTOType } from "@emergentmethods/flowdapt-ts-sdk";
+import { TriggerRuleResourceReadResponseDTOType } from "@emergentmethods/flowdapt-ts-sdk";
 
 interface IFormConfigFromYamlProps {
   uid?: string;
-  config: ConfigResourceReadResponseDTOType[FLOWDAPT_API_VERSION]["data"] | null;
+  trigger: TriggerRuleResourceReadResponseDTOType[FLOWDAPT_API_VERSION]["data"] | null;
 }
 
 const FormConfigFromYaml = (props: IFormConfigFromYamlProps) => {
-  const { config, uid } = props;
+  const { trigger, uid } = props;
   const dict = useDictionaries();
   const schema = getSchema(dict);
 
@@ -32,7 +32,7 @@ const FormConfigFromYaml = (props: IFormConfigFromYamlProps) => {
     // @ts-ignore
     resolver: yupResolver(schema),
     defaultValues: {
-      yaml: uid && config ? parseJsonToYaml(config) : configExample,
+      yaml: uid && trigger ? parseJsonToYaml(trigger) : triggerExample,
       uid: uid,
     },
   });
@@ -56,7 +56,7 @@ const FormConfigFromYaml = (props: IFormConfigFromYamlProps) => {
         setValue={setValue}
         getValues={getValues}
         fieldName="yaml"
-        namespace="configs"
+        namespace="trigger"
         errors={errors}
         language="yaml"
       />

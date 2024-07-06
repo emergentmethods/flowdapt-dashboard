@@ -2,13 +2,13 @@
 
 import TableRowActions, { ITableRowActions } from "@/components/tables/TableRowActions";
 import useDictionaries from "@/hooks/useDictionaries";
-import ModalDeleteConfig from "./ModalDeleteConfig";
+import ModalDeleteTrigger from "./ModalDeleteTrigger";
 import { TriggerData } from "../TriggerList";
 
 const ConfigRowActions = (props: TriggerData) => {
   const { name } = props;
   const dict = useDictionaries();
-  const modalDeleteId = `modal-delete-config-${name}`;
+  const modalDeleteId = `modal-delete-trigger-${name}`;
   const actions: ITableRowActions[] = [
     {
       label: dict.global.delete,
@@ -16,13 +16,13 @@ const ConfigRowActions = (props: TriggerData) => {
     },
     {
       label: dict.global.editYaml,
-      link: `/config/yaml/edit/${name}`,
+      link: `/trigger/yaml/edit/${name}`,
     },
   ];
 
   return (
     <TableRowActions actions={actions}>
-      <ModalDeleteConfig configName={name} modalId={modalDeleteId} />
+      <ModalDeleteTrigger triggerName={name} modalId={modalDeleteId} />
     </TableRowActions>
   );
 };
