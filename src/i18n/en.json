@@ -70,6 +70,21 @@
     "modalDeleteRowTitle": "Delete configuration",
     "newFromYaml": "New"
   },
+  "trigger": {
+    "singular": "Trigger",
+    "title": "Triggers",
+    "name": "Name",
+    "type": "Type",
+    "description": "Description",
+    "trigger": "Trigger",
+    "modalConfirmDeleteSelected": "Are you sure you want to delete the selected trigger?",
+    "modalDeleteSelectedTitle": "Delete triggers",
+    "modalConfirmDeleteRow": "Are you sure you want to delete this trigger?",
+    "modalDeleteRowTitle": "Delete trigger",
+    "newFromYaml": "New",
+    "field_configYamlInvalid": "Invalid YAML",
+    "field_triggerYamlNoReferencesError": "The YAML definition must not contain references."
+  },
   "stage": {
     "modalAddStageTitle": "Add stage",
     "field_name": "Name",

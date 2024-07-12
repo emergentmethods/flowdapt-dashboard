@@ -1,12 +1,85 @@
 "use client";
 
-import { NodeProps } from "reactflow";
-import { Handle, Position } from "reactflow";
-import StageFormModalContext from "./StageForm/StageFormModalContext";
 import React from "react";
+import { NodeProps, Handle, Position } from "reactflow";
 import { PencilIcon } from "@heroicons/react/24/solid";
+import StageFormModalContext from "./StageForm/StageFormModalContext";
 import useDictionaries from "@/hooks/useDictionaries";
 import { IWorkflowStageDefinition } from "./utils";
+
+type HandleType = "source" | "target";
+
+interface CustomHandleProps {
+  type: HandleType;
+  position: Position;
+  id: string;
+  isConnectable: boolean;
+}
+
+const CustomHandle: React.FC<CustomHandleProps> = ({ type, position, id, isConnectable }) => {
+  const handleStyle: React.CSSProperties = {
+    width: "50px",
+    height: "25px",
+    background: "transparent",
+    border: "none",
+    zIndex: 1,
+    position: "absolute",
+    [position === Position.Left || position === Position.Right ? "top" : "left"]: "50%",
+    [position]: "-9px",
+    transform:
+      position === Position.Left || position === Position.Right
+        ? "translateY(-50%)"
+        : "translateX(-50%)",
+  };
+
+  const innerHandleStyle: React.CSSProperties = {
+    position: "absolute",
+    width: "12px",
+    height: "12px",
+    backgroundColor: "#D3D3D3",
+    borderRadius: "3px",
+    [position === Position.Bottom ? "bottom" : "top"]: "3px",
+    [position === Position.Right ? "right" : "left"]: "50%",
+    transform:
+      position === Position.Left || position === Position.Right
+        ? "translateY(-50%)"
+        : "translateX(-50%)",
+  };
+
+  switch (position) {
+    case Position.Left:
+    case Position.Right:
+      handleStyle.top = "50%";
+      handleStyle.transform = "translateY(-50%)";
+      handleStyle[position] = "-9px"; // Adjust this value as needed
+      innerHandleStyle.top = "50%";
+      innerHandleStyle.transform = "translateY(-50%)";
+      innerHandleStyle[position] = "3px";
+      break;
+    case Position.Top:
+    case Position.Bottom:
+      handleStyle.left = "50%";
+      handleStyle.transform = "translateX(-50%)";
+      handleStyle[position] = "-9px";
+      innerHandleStyle.left = "50%";
+      innerHandleStyle.transform = "translateX(-50%)";
+      innerHandleStyle[position] = "3px";
+      break;
+  }
+
+  return (
+    <Handle
+      type={type}
+      position={position}
+      id={id}
+      isConnectable={isConnectable}
+      data-testid={`node${position}Handle`}
+      style={handleStyle}
+    >
+      <div style={innerHandleStyle} />
+    </Handle>
+  );
+};
 
 const StageNode = ({ data, isConnectable, id }: NodeProps<IWorkflowStageDefinition>) => {
   const dict = useDictionaries();
@@ -20,33 +93,23 @@ const StageNode = ({ data, isConnectable, id }: NodeProps<IWorkflowStageDefiniti
 
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
-      <Handle
-        type="target"
-        position={Position.Top}
-        id="top"
-        isConnectable={isConnectable}
-        data-testid="nodeTopHandle"
-        className="w-10 h-10 bg-cyan-400"
-      />
-      <Handle
+      <CustomHandle type="target" position={Position.Top} id="top" isConnectable={isConnectable} />
+      <CustomHandle
         type="target"
         position={Position.Left}
         id="left"
         isConnectable={isConnectable}
-        data-testid="nodeLeftHandle"
       />
-      <Handle
+      <CustomHandle
         type="source"
         position={Position.Bottom}
         id="bottom"
-        data-testid="nodeBottomHandle"
         isConnectable={isConnectable}
       />
-      <Handle
+      <CustomHandle
         type="source"
         position={Position.Right}
         id="right"
-        data-testid="nodeRightHandle"
         isConnectable={isConnectable}
       />
       <div className="card-body tooltip tooltip-info" data-tip={dict.stage.removeStageOrConnection}>
