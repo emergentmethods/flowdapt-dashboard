@@ -7,7 +7,7 @@ interface Window {
 declare namespace NodeJS {
   interface ProcessEnv {
     // Declare environment variables here
-    NEXT_PUBLIC_API_URL: string;
+    API_BASE_URL: string;
   }
 }
 
