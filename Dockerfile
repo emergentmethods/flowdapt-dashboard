@@ -6,7 +6,7 @@ RUN apk update
 RUN apk add --no-cache libc6-compat
 
 # Setup pnpm on the alpine base
-FROM alpine as base
+FROM alpine AS base
 RUN npm install pnpm --global
 RUN pnpm config set store-dir ~/.pnpm-store
 
@@ -23,7 +23,7 @@ RUN --mount=type=cache,id=pnpm,target=~/.pnpm-store pnpm install --frozen-lockfi
 # Copy source code
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm build
 
 # Final image
