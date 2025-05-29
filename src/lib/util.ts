@@ -77,7 +77,7 @@ export const getLanguage = (props: Flowdapt.IPageParams) => {
  * @returns The created Configuration object with the basePath set.
  */
 export const getClient = () => {
-  const baseUrl = process.env.API_BASE_URL || "http://localhost:8070";
+  const baseUrl = process.env.API_BASE_URL || "http://localhost:8080";
   const flowdaptSDKClient = new FlowdaptSDK({
     baseUrl,
   });
